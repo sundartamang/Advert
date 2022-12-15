@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+a {
+  text-decoration: none;
+  color: none;
+  cursor: pointer;
+}
+
+.custom_background {
+  background-color: #bb1919 !important;
+}
+
+.custom_background_two {
+  background-color: rgb(34, 34, 34) !important;
+}
+
+.custom_btn {
+
+  color: #fff !important
+}
+
+.card {
+  border-radius: 0px !important;
+
+  .card-header {
+    border-radius: 0px !important;
+  }
+
+  .card-body {
+    border-radius: 0px !important;
+  }
+}
+
+.modal {
+  border-radius: 0px !important;
+
+  .modal-content {
+    border-radius: 0px !important;
+
+    .modal-header {
+      border-radius: 0px !important;
+    }
+
+    .modal-body {
+      border-radius: 0px !important;
+    }
+  }
+}

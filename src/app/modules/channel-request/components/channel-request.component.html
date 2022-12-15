@@ -1,0 +1,99 @@
+<div class="card-header">
+  <div class="row">
+    <div class="col-6">
+      <h4 class="my-2">{{adverData.name}}</h4>
+    </div>
+    <div class="col-6">
+      <button class="btn custom_background_two btn-oval btn-sm float-right text-light"
+        data-toggle="modal" data-target="#exampleModal"
+        (click)="openCreateModal()">
+        <b>Add channel</b> &nbsp;<i class="fa fa-plus-circle mr-2"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="card-body">
+  <!-- kendo grid start -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S.N.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Max price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of gridData, index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>
+          {{data.name}}
+        </td>
+        <td>
+          {{data.max_price}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- kendo grid end -->
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_background">
+        <h5 class="modal-title text-light" id="exampleModalLabel ">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true" id="modal" class="text-light">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="advertForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" class="form-control" id="nameInput"
+              placeholder="Enter name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="nameInput">Advert name</label>
+            <input type="text" class="form-control" id="nameInput"
+              [value]="adverData.name"
+              formControlName="channel_id" readonly>
+          </div>
+          <div class="form-group">
+            <label for="nameInput">Max price</label>
+            <input type="number" class="form-control" id="nameInput"
+              placeholder="Enter max price"
+              formControlName="max_price">
+          </div>
+          <div class="form-group">
+            <label for="nameInput">Click URL</label>
+            <input type="url" class="form-control" id="nameInput"
+              placeholder="Enter url"
+              formControlName="click_through_url">
+          </div>
+          <div class="form-group">
+            <label for="nameInput">Start tome</label>
+            <input type="text" class="form-control" id="nameInput"
+              placeholder="Enter start time"
+              formControlName="start_time">
+          </div>
+          <div class="form-group">
+            <label for="nameInput">End time</label>
+            <input type="text" class="form-control" id="nameInput"
+              placeholder="Enter end time"
+              formControlName="end_time">
+          </div>
+          <button type="submit" class="btn btn-primary"
+            [disabled]="advertForm.invalid">{{buttonName}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal section end -->

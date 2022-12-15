@@ -1,0 +1,90 @@
+<div class="card-header">
+  <button class="btn custom_background_two btn-ova btn-sm text-light" data-toggle="modal" data-target="#exampleModal" (click)="openCreateModal()">
+  <b>Add advert</b>&nbsp;<i class="fa fa-plus-circle mr-2"></i>
+</button>
+
+</div>
+<div class="card-body">
+  <!-- kendo grid start -->
+  <kendo-grid
+  [kendoGridBinding]="gridData"
+  [pageSize]="pageSize"
+  [skip]="skip"
+  [pageable]="true"
+  [filterable]="true"
+  [loading]="isLoading"
+  [sortable]="{
+  allowUnsort : true,
+  mode : 'single'
+  }"
+  (pageChange)="pageChange($event)">
+  <kendo-grid-column
+      title="S.N"
+      [filterable]="false"
+      [headerStyle]="{
+      'font-weight': 'bold' }"
+      [width]="85"
+      [minResizableWidth]="75">
+      <ng-template
+          kendoGridCellTemplate
+          let-rowIndex="rowIndex">
+          <p>{{ rowIndex + 1 }}</p>
+      </ng-template>
+
+  </kendo-grid-column>
+  <kendo-grid-column
+      field="name"
+      title="Name"
+      [headerStyle]="{
+      'font-weight': 'bold' }">
+  </kendo-grid-column>
+  <kendo-grid-column
+      title="Action"
+      [headerStyle]="{
+      'font-weight': 'bold'
+      }"
+      [filterable]="false">
+      <ng-template
+          kendoGridCellTemplate
+          let-dataItem="dataItem">
+          <a (click)="redirect(dataItem.id)">
+            <i class="fa fa-plus-circle mr-2"></i>
+          </a>
+      </ng-template>
+  </kendo-grid-column>
+</kendo-grid>
+  <!-- kendo grid end ---->
+</div>
+
+
+<!-- modal section start -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_background">
+        <h5 class="modal-title text-light" id="exampleModalLabel">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="text-light" aria-hidden="true" id="modal">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="advertForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" class="form-control" id="nameInput" placeholder="Enter name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Select parent channel</label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="parent_chhanel_id">
+              <option value="parent channel one">Parent channel one</option>
+              <option value="parent channel two">Parent channel two</option>
+              <option value="parent channel three">Parent channel three</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">{{buttonName}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
