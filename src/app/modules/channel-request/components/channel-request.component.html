@@ -1,7 +1,10 @@
 <div class="card-header">
   <div class="row">
     <div class="col-6">
-      <h4 class="my-2">{{adverData.name}}</h4>
+      <span class="back_location" (click)="back()">
+        <b><<</b>
+        Back
+      </span>      
     </div>
     <div class="col-6">
       <button class="btn custom_background_two btn-oval btn-sm float-right text-light"
@@ -13,27 +16,62 @@
   </div>
 </div>
 <div class="card-body">
-  <!-- kendo grid start -->
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">S.N.</th>
-        <th scope="col">Name</th>
-        <th scope="col">Max price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of gridData, index as i">
-        <th scope="row">{{i+1}}</th>
-        <td>
-          {{data.name}}
-        </td>
-        <td>
-          {{data.max_price}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- kendo grid start -->
+    <p>News chanel under <b>{{adverData.name}}</b> advert</p>
+    <kendo-grid
+      [kendoGridBinding]="gridData"
+      [pageSize]="pageSize"
+      [skip]="skip"
+      [pageable]="true"
+      [filterable]="true"
+      [loading]="isLoading"
+      [sortable]="{
+      allowUnsort : true,
+      mode : 'single'
+      }"
+      (pageChange)="pageChange($event)">
+      <kendo-grid-column
+          title="S.N"
+          [filterable]="false"
+          [headerStyle]="{
+          'font-weight': 'bold' }"
+          [width]="85"
+          [minResizableWidth]="75">
+          <ng-template
+              kendoGridCellTemplate
+              let-rowIndex="rowIndex">
+              <p>{{ rowIndex + 1 }}</p>
+          </ng-template>
+    
+      </kendo-grid-column>
+      <kendo-grid-column
+          field="name"
+          title="Name"
+          [headerStyle]="{
+          'font-weight': 'bold' }">
+      </kendo-grid-column>
+      <kendo-grid-column
+        field="max_price"
+        title="Max price"
+        [headerStyle]="{
+        'font-weight': 'bold' }">
+      </kendo-grid-column>
+      <kendo-grid-column
+        field="start_time"
+        title="Start time"
+        [filterable]="false"
+        [headerStyle]="{
+        'font-weight': 'bold' }">
+      </kendo-grid-column>
+      <kendo-grid-column
+        field="end_time"
+        title="End time"
+        [filterable]="false"
+        [headerStyle]="{
+        'font-weight': 'bold' }">
+      </kendo-grid-column>
+    </kendo-grid>
+    <!-- kendo grid end ---->
   <!-- kendo grid end -->
 </div>
 
@@ -89,8 +127,8 @@
               placeholder="Enter end time"
               formControlName="end_time">
           </div>
-          <button type="submit" class="btn btn-primary"
-            [disabled]="advertForm.invalid">{{buttonName}}</button>
+          <button type="submit" class="btn custom_background_two btn-md text-light"
+            [disabled]="advertForm.invalid" style="float: right;">{{buttonName}}</button>
         </form>
       </div>
     </div>

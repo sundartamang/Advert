@@ -1,0 +1,43 @@
+{
+  "advert": [
+    {
+      "id": 1,
+      "name": "json-server",
+      "parent_chhanel_id": "typicode"
+    },
+    {
+      "id": 2,
+      "name": "BBC",
+      "parent_chhanel_id": "parent channel two"
+    }
+  ],
+  "channel": [
+    {
+      "id": 1,
+      "name": "Kantipur",
+      "max_price": 30,
+      "channel_id": "",
+      "click_through_url": "kantipur.com",
+      "start_time": "6:00",
+      "end_time": "7:00"
+    },
+    {
+      "id": 2,
+      "name": "AP1",
+      "max_price": 40,
+      "channel_id": "",
+      "click_through_url": "sdsf",
+      "start_time": "4",
+      "end_time": "5"
+    },
+    {
+      "id": 3,
+      "name": "News24",
+      "max_price": 50,
+      "channel_id": "",
+      "click_through_url": "new245.com",
+      "start_time": "7",
+      "end_time": "8"
+    }
+  ]
+}

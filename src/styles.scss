@@ -20,6 +20,7 @@ a {
 
 .card {
   border-radius: 0px !important;
+  border-bottom: none !important;
 
   .card-header {
     border-radius: 0px !important;
@@ -27,6 +28,8 @@ a {
 
   .card-body {
     border-radius: 0px !important;
+    height: auto;
+    min-height: 300px;
   }
 }
 

@@ -38,7 +38,7 @@ export class AdvertComponent implements OnInit {
   dirKey = "asc";
   public currentPage = 1;
   public pagelimtit = 10;
-  // gridData: any = [];
+  gridData: any = [];
 
   //sorting kendo data
   public allowUnsort = true;
@@ -73,7 +73,7 @@ export class AdvertComponent implements OnInit {
       ],
       name: [
         advert ? advert.name : "",
-        [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
+        [Validators.required]
       ],
       parent_chhanel_id: [
         advert ? advert.parent_chhanel_id : "",
@@ -116,6 +116,7 @@ export class AdvertComponent implements OnInit {
       if(res){
         this.getData();
         this.closeModal();
+        this.advertForm.reset();
       }
     })
   }
@@ -133,7 +134,8 @@ export class AdvertComponent implements OnInit {
 
   getData() {
     this._adverService.getAdvert().subscribe((res)=>{
-      // this.gridData = res
+      console.log("RESPONSE ADVERT IS => ", res)
+      this.gridData = res
     })
   }
 
@@ -147,18 +149,6 @@ export class AdvertComponent implements OnInit {
   redirect(id:any){
     this._router.navigate([`/request-channerl/${id}`])
   }
-
-  gridData = [
-    {
-      id :1,
-      name : 'Advert one',
-      parent_chhanel_id : 'channel one'
-    }
-  ]
-
-
-
-
 
 
 

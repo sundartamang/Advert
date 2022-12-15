@@ -39,7 +39,7 @@
       'font-weight': 'bold' }">
   </kendo-grid-column>
   <kendo-grid-column
-      title="Action"
+      title="Add channel"
       [headerStyle]="{
       'font-weight': 'bold'
       }"
@@ -47,7 +47,7 @@
       <ng-template
           kendoGridCellTemplate
           let-dataItem="dataItem">
-          <a (click)="redirect(dataItem.id)">
+          <a (click)="redirect(dataItem.id)" data-toggle="tooltip" data-placement="top" title="add channel">
             <i class="fa fa-plus-circle mr-2"></i>
           </a>
       </ng-template>
@@ -82,7 +82,7 @@
               <option value="parent channel three">Parent channel three</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">{{buttonName}}</button>
+          <button [disabled]="advertForm.invalid" type="submit" class="btn custom_background_two btn-md text-light" style="float: right;">{{buttonName}}</button>
         </form>
       </div>
     </div>

@@ -4,6 +4,12 @@ import { ChannelService } from '../service/channel.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from "@angular/forms";
 import { Channel } from 'src/app/modules/channel-request/models/channelModal';
 import $ from 'jquery';
+import {Location} from '@angular/common';
+import {
+  DataStateChangeEvent,
+  GridDataResult,
+  PageChangeEvent
+} from "@progress/kendo-angular-grid";
 
 @Component({
   selector: 'app-channel-request',
@@ -23,10 +29,21 @@ export class ChannelRequestComponent implements OnInit {
   channel: Channel
   gridData: any = []
 
+  public gridView: GridDataResult;
+  serviceCategoryDetail: any = [];
+  isLoading: boolean;
+  public skip = 0;
+  public pageSize = 15;
+  orderByKey = "";
+  dirKey = "asc";
+  public currentPage = 1;
+  public pagelimtit = 10;
+
   constructor(
     private _activateRoute: ActivatedRoute,
     private _channelService: ChannelService,
     private _fb: FormBuilder,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -128,6 +145,11 @@ export class ChannelRequestComponent implements OnInit {
   closeModal() {
     $('.modal-backdrop').remove();
     document.getElementById("modal").click();
+  }
+
+  //back to previous page
+  back(){
+    this._location.back();
   }
 
 }

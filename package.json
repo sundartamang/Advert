@@ -19,9 +19,6 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "rxjs": "~6.4.0",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
     "@progress/kendo-angular-barcodes": "^0.2.3",
     "@progress/kendo-angular-buttons": "^5.0.0",
     "@progress/kendo-angular-common": "^1.0.0",
@@ -39,7 +36,10 @@
     "@progress/kendo-drawing": "^1.6.0",
     "@progress/kendo-licensing": "^1.2.2",
     "@progress/kendo-theme-default": "^4.6.0",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.29",
