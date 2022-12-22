@@ -92,40 +92,69 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="advertForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="nameInput">Name</label>
-            <input type="text" class="form-control" id="nameInput"
-              placeholder="Enter name" formControlName="name">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input type="text" class="form-control" id="nameInput"
+                  placeholder="Enter name" formControlName="name">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="advertNameInput">Advert name</label>
+                <input type="text" class="form-control" id="advertNameInput"
+                  [value]="adverData.name"
+                  formControlName="channel_id" readonly>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="nameInput">Advert name</label>
-            <input type="text" class="form-control" id="nameInput"
-              [value]="adverData.name"
-              formControlName="channel_id" readonly>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <label for="bidPriceInput">Bid price</label>
+              <input type="number" class="form-control" id="bidPriceInput"
+                placeholder="Enter maximum bid price"
+                min="0"
+                formControlName="maximum_bid_price">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="budgetInput">Budget</label>
+                <input type="number" class="form-control" id="budgetInput"
+                  placeholder="Enter budget"
+                  min="0"
+                  formControlName="budget">
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="nameInput">Max price</label>
-            <input type="number" class="form-control" id="nameInput"
-              placeholder="Enter max price"
-              formControlName="max_price">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="userInput">Select user</label>
+                <input type="number" class="form-control" id="userInput"
+                  placeholder="Enter user"
+                  formControlName="user">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <label for="selectAdType">Select Ad type</label>
+              <select class="form-control" id="selectAdType">
+                <option>Ad type one</option>
+                <option>Ad type two</option>
+                <option>Ad type three</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="nameInput">Click URL</label>
-            <input type="url" class="form-control" id="nameInput"
-              placeholder="Enter url"
-              formControlName="click_through_url">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <label for="adImageInput">Select Ad image</label>
+              <input type="file" class="form-control" id="adImageInput" formControlName="image" (change)="readImageURL($event);">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="nameInput">Start tome</label>
-            <input type="text" class="form-control" id="nameInput"
-              placeholder="Enter start time"
-              formControlName="start_time">
-          </div>
-          <div class="form-group">
-            <label for="nameInput">End time</label>
-            <input type="text" class="form-control" id="nameInput"
-              placeholder="Enter end time"
-              formControlName="end_time">
+          <div class="row mt-3">
+            <div class="col-12">
+              <img *ngIf="imageSrc" id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
+            </div>
           </div>
           <button type="submit" class="btn custom_background_two btn-md text-light"
             [disabled]="advertForm.invalid" style="float: right;">{{buttonName}}</button>

@@ -9,6 +9,11 @@
       "id": 2,
       "name": "BBC",
       "parent_chhanel_id": "parent channel two"
+    },
+    {
+      "id": 3,
+      "name": "Kantipur sdfdsf",
+      "parent_chhanel_id": "parent channel two"
     }
   ],
   "channel": [

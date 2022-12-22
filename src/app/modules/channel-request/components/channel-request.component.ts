@@ -4,7 +4,7 @@ import { ChannelService } from '../service/channel.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from "@angular/forms";
 import { Channel } from 'src/app/modules/channel-request/models/channelModal';
 import $ from 'jquery';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import {
   DataStateChangeEvent,
   GridDataResult,
@@ -65,40 +65,36 @@ export class ChannelRequestComponent implements OnInit {
   buildChannerlForm() {
     const channel = this.channel;
     this.advertForm = this._fb.group({
-      id: new FormControl(channel ? channel.id : ""),
-      name: new FormControl(channel ? channel.name : "", Validators.required),
-      max_price: new FormControl(channel ? channel.max_price : "", Validators.required),
-      channel_id: new FormControl(this.advertname),
-      click_through_url: new FormControl(channel ? channel.click_through_url : "", Validators.required),
-      start_time: new FormControl(channel ? channel.start_time : "", Validators.required),
-      end_time: new FormControl(channel ? channel.end_time : "", Validators.required),
-
-      // id: [
-      //   channel ? channel.id : "",
-      // ],
-      // name: [
-      //   channel ? channel.name : "",
-      //   [Validators.required]
-      // ],
-      // channel_id: [
-      //   channel ? channel.channel_id :  this.adverData.name
-      // ],
-      // max_price: [
-      //   channel ? channel.max_price : "",
-      //   [Validators.required]
-      // ],
-      // click_through_url: [
-      //   channel ? channel.click_through_url : "",
-      //   [Validators.required]
-      // ],
-      // start_time: [
-      //   channel ? channel.start_time : "",
-      //   [Validators.required]
-      // ],
-      // end_time: [
-      //   channel ? channel.end_time : "",
-      //   [Validators.required]
-      // ]
+      id: [
+        channel ? channel.id : "",
+      ],
+      name: [
+        channel ? channel.name : "",
+        [Validators.required]
+      ],
+      channel_id: [
+        channel ? channel.channel_id : this.adverData.name
+      ],
+      maximum_bid_price: [
+        channel ? channel.maximum_bid_price : "",
+        [Validators.required]
+      ],
+      budget: [
+        channel ? channel.budget : "",
+        [Validators.required]
+      ],
+      image: [
+        channel ? channel.image : "",
+        [Validators.required]
+      ],
+      type: [
+        channel ? channel.type : "",
+        [Validators.required]
+      ],
+      user: [
+        channel ? channel.user : "",
+        [Validators.required]
+      ]
     });
 
   }
@@ -120,7 +116,6 @@ export class ChannelRequestComponent implements OnInit {
   }
 
   createChannel() {
-
     console.log(this.advertForm.value)
     this._channelService.addChannel(this.advertForm.value).subscribe((res) => {
       console.log("RES = > ", res)
@@ -141,6 +136,18 @@ export class ChannelRequestComponent implements OnInit {
     })
   }
 
+  // 
+  imageSrc: string;
+  readImageURL(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result as string;
+      reader.readAsDataURL(file);
+    }
+  }
+
   // close modal
   closeModal() {
     $('.modal-backdrop').remove();
@@ -148,7 +155,7 @@ export class ChannelRequestComponent implements OnInit {
   }
 
   //back to previous page
-  back(){
+  back() {
     this._location.back();
   }
 

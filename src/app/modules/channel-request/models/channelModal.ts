@@ -1,11 +1,13 @@
 export interface Channel {
     id : string;
     name : string;
+    email : string;
     channel_id : string;
-    max_price : string;
-    click_through_url: string;
-    start_time : string;
-    end_time : string;
+    maximum_bid_price : string;
+    budget : string;
+    image : string;
+    type : string;
+    user : string;
 }
 
 export interface ChannelRootModel {
