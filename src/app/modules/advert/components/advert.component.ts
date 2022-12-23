@@ -14,7 +14,6 @@ import {
 } from "@progress/kendo-data-query";
 
 
-
 @Component({
   selector: 'app-advert',
   templateUrl: './advert.component.html',

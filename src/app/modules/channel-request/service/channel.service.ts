@@ -11,6 +11,12 @@ export class ChannelService {
     private _http: HttpClient
   ) { }
 
+  //get user
+  get_user_list = 'http://localhost:3000/user'
+  getUsers(): Observable<any> {
+    return this._http.get(this.get_user_list);
+  }
+
   //update adver
   get_advert = 'http://localhost:3000/advert'
   getAdvertDetail(id): Observable<any> {

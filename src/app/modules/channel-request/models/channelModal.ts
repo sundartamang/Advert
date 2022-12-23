@@ -1,7 +1,6 @@
 export interface Channel {
     id : string;
     name : string;
-    email : string;
     channel_id : string;
     maximum_bid_price : string;
     budget : string;

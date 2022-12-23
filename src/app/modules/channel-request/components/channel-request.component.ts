@@ -84,8 +84,7 @@ export class ChannelRequestComponent implements OnInit {
         [Validators.required]
       ],
       image: [
-        channel ? channel.image : "",
-        [Validators.required]
+        channel ? channel.image : ""
       ],
       type: [
         channel ? channel.type : "",
@@ -103,6 +102,7 @@ export class ChannelRequestComponent implements OnInit {
     this.editMode = false;
     this.title = "Add";
     this.buttonName = "Save";
+    this.getUserList();
 
   }
 
@@ -158,5 +158,16 @@ export class ChannelRequestComponent implements OnInit {
   back() {
     this._location.back();
   }
+
+  // get user list
+  userData : any = [];
+  getUserList() {
+    this._channelService.getUsers().subscribe((res) => {
+      this.userData = res
+    })
+  }
+
+
+
 
 }

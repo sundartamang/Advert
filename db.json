@@ -44,5 +44,17 @@
       "start_time": "7",
       "end_time": "8"
     }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "name": "sundar",
+      "email": "sundar@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "satish",
+      "email": "satish@gmail.com"
+    }
   ]
 }

@@ -10,7 +10,7 @@
       <button class="btn custom_background_two btn-oval btn-sm float-right text-light"
         data-toggle="modal" data-target="#exampleModal"
         (click)="openCreateModal()">
-        <b>Add channel</b> &nbsp;<i class="fa fa-plus-circle mr-2"></i>
+        <b>Add advert</b> &nbsp;<i class="fa fa-plus-circle mr-2"></i>
       </button>
     </div>
   </div>
@@ -46,7 +46,7 @@
       </kendo-grid-column>
       <kendo-grid-column
           field="name"
-          title="Name"
+          title="Ad name"
           [headerStyle]="{
           'font-weight': 'bold' }">
       </kendo-grid-column>
@@ -130,18 +130,18 @@
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label for="userInput">Select user</label>
-                <input type="number" class="form-control" id="userInput"
-                  placeholder="Enter user"
-                  formControlName="user">
+                  <label for="userInput">Select user </label>
+                  <select class="form-control" id="userInput" formControlName="user">
+                    <option *ngFor="let data of userData" [value]="data.name">{{data.name}}</option>
+                  </select>
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <label for="selectAdType">Select Ad type</label>
-              <select class="form-control" id="selectAdType">
-                <option>Ad type one</option>
-                <option>Ad type two</option>
-                <option>Ad type three</option>
+              <select class="form-control" id="selectAdType" formControlName="user">
+                <option [value]="one">Ad type one</option>
+                <option [value]="two">Ad type two</option>
+                <option [value]="three">Ad type three</option>
               </select>
             </div>
           </div>

@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'request-channerl/:id',
     loadChildren: () => import("./modules/channel-request/channel-request.module").then(m => m.ChannelRequestModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import("./modules/user/user.module").then(m => m.UserModule)
   }
 ];
 
