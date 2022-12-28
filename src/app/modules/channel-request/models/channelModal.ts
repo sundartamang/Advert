@@ -1,12 +1,7 @@
 export interface Channel {
-    id : string;
+    channelId : string;
     name : string;
-    channel_id : string;
-    maximum_bid_price : string;
-    budget : string;
-    image : string;
-    type : string;
-    user : string;
+    parent : string;
 }
 
 export interface ChannelRootModel {

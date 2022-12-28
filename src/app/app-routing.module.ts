@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import("./modules/advert/advert.module").then(m => m.AdvertModule)
+    loadChildren: () => import("./modules/channel-request/channel-request.module").then(m => m.ChannelRequestModule)
   },
   {
-    path: 'request-channerl/:id',
-    loadChildren: () => import("./modules/channel-request/channel-request.module").then(m => m.ChannelRequestModule)
+    path: 'advert/:id',
+    loadChildren: () => import("./modules/advert/advert.module").then(m => m.AdvertModule)
   },
   {
     path: 'user',

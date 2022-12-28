@@ -18,16 +18,13 @@ import {
 })
 export class ChannelRequestComponent implements OnInit {
 
-  // variable
-  adverId
-  adverData: any = []
-  advertname: string = ""
+
+  // variable declaration
   editMode: boolean = false;
   title: string;
   buttonName: string;
-  advertForm: FormGroup;
-  channel: Channel
-  gridData: any = []
+  channelForm: FormGroup;
+  channelDetail: Channel
 
   public gridView: GridDataResult;
   serviceCategoryDetail: any = [];
@@ -38,60 +35,51 @@ export class ChannelRequestComponent implements OnInit {
   dirKey = "asc";
   public currentPage = 1;
   public pagelimtit = 10;
+  gridData: any = [];
+
+  //sorting kendo data
+  public allowUnsort = true;
+  // public sort: SortDescriptor[] = [
+  //   {
+  //     field: "",
+  //     dir: "asc",
+  //   },
+  // ];
+
 
   constructor(
-    private _activateRoute: ActivatedRoute,
-    private _channelService: ChannelService,
     private _fb: FormBuilder,
-    private _location: Location
+    private _channelService: ChannelService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
-    this.adverId = this._activateRoute.snapshot.params['id']
-    this.getAdverDetail();
-    this.buildChannerlForm();
+    this.buildAdvertorm();
     this.getData();
   }
 
-  getAdverDetail() {
-    this._channelService.getAdvertDetail(this.adverId).subscribe((res) => {
-      this.adverData = res
-      this.advertname = res.name
+  
+  // get channel list
+  getData() {
+    this._channelService.getChannelList().subscribe((res) => {
+      console.warn("RESPONSE channel IS => ", res['channels'])
+      this.gridData = res['channels']
     })
   }
 
-
   // form builder
-  buildChannerlForm() {
-    const channel = this.channel;
-    this.advertForm = this._fb.group({
-      id: [
-        channel ? channel.id : "",
+  buildAdvertorm() {
+    const channel = this.channelDetail;
+    this.channelForm = this._fb.group({
+      channelId: [
+        channel ? channel.channelId : "",
       ],
       name: [
         channel ? channel.name : "",
         [Validators.required]
       ],
-      channel_id: [
-        channel ? channel.channel_id : this.adverData.name
-      ],
-      maximum_bid_price: [
-        channel ? channel.maximum_bid_price : "",
-        [Validators.required]
-      ],
-      budget: [
-        channel ? channel.budget : "",
-        [Validators.required]
-      ],
-      image: [
-        channel ? channel.image : ""
-      ],
-      type: [
-        channel ? channel.type : "",
-        [Validators.required]
-      ],
-      user: [
-        channel ? channel.user : "",
+      parent: [
+        channel ? channel.parent : "",
         [Validators.required]
       ]
     });
@@ -102,51 +90,49 @@ export class ChannelRequestComponent implements OnInit {
     this.editMode = false;
     this.title = "Add";
     this.buttonName = "Save";
-    this.getUserList();
 
   }
 
-  onSubmit() {
+  openEditModal() {
+    this.editMode = true;
+    this.title = "Update";
+    this.buttonName = "Submit";
+  }
+
+
+  // on submit book
+  onSubmit(): void {
     if (this.editMode) {
-      this.updateChannel();
+      this.updateAdvert();
     } else {
       this.createChannel();
 
     }
   }
 
+  // create advert
   createChannel() {
-    console.log(this.advertForm.value)
-    this._channelService.addChannel(this.advertForm.value).subscribe((res) => {
+    console.log("create submit function called")
+    this._channelService.addChannel(this.channelForm.value).subscribe((res) => {
       console.log("RES = > ", res)
       if (res) {
         this.getData();
         this.closeModal();
+        this.channelForm.reset();
       }
     })
   }
 
-  updateChannel() {
+  // update advert
+  updateAdvert() {
 
   }
 
-  getData() {
-    this._channelService.getChannel().subscribe((res) => {
-      this.gridData = res
-    })
+  // page change
+  public pageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
   }
 
-  // 
-  imageSrc: string;
-  readImageURL(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result as string;
-      reader.readAsDataURL(file);
-    }
-  }
 
   // close modal
   closeModal() {
@@ -154,19 +140,9 @@ export class ChannelRequestComponent implements OnInit {
     document.getElementById("modal").click();
   }
 
-  //back to previous page
-  back() {
-    this._location.back();
+  redirect(id: any) {
+    this._router.navigate([`/request-channerl/${id}`])
   }
-
-  // get user list
-  userData : any = [];
-  getUserList() {
-    this._channelService.getUsers().subscribe((res) => {
-      this.userData = res
-    })
-  }
-
 
 
 
