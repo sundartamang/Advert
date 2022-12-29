@@ -46,24 +46,20 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.buildUserForm();
-    this.getData();
+    this.getUsers();
   }
 
   // form builder
   buildUserForm() {
     const user = this.user;
     this.userForm = this._fb.group({
-      id: [
-        user ? user.id : "",
+      customerId: [
+        user ? user.customerId : "",
       ],
       name: [
         user ? user.name : "",
         [Validators.required]
-      ],
-      email: [
-        user ? user.email : "",
-        [Validators.required]
-      ],
+      ]
     });
 
   }
@@ -72,7 +68,6 @@ export class UserComponent implements OnInit {
     this.editMode = false;
     this.title = "Add";
     this.buttonName = "Save";
-
   }
 
 
@@ -88,11 +83,12 @@ export class UserComponent implements OnInit {
 
 
   createuser() {
-    console.log("users data is => ", this.userForm.value)
-    this._userService.addUser(this.userForm.value).subscribe((res) => {
-      console.log("RES = > ", res)
+    let customer = {
+      customer : this.userForm.value
+    }
+    this._userService.addUser(customer).subscribe((res) => {
       if (res) {
-        this.getData();
+        this.getUsers();
         this.closeModal();
       }
     })
@@ -102,9 +98,9 @@ export class UserComponent implements OnInit {
 
   }
 
-  getData() {
-    this._userService.getUsers().subscribe((res) => {
-      this.gridData = res
+  getUsers() {
+    this._userService.getUsersList().subscribe((res) => {
+      this.gridData = res['customers']
     })
   }
 

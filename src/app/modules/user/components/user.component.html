@@ -38,12 +38,6 @@
         [headerStyle]="{
         'font-weight': 'bold' }">
     </kendo-grid-column>
-    <kendo-grid-column
-        field="email"
-        title="Email"
-        [headerStyle]="{
-        'font-weight': 'bold' }">
-    </kendo-grid-column>
   </kendo-grid>
     <!-- kendo grid end ---->
   </div>
@@ -66,10 +60,6 @@
               <label for="nameInput">Name</label>
               <input type="text" class="form-control" id="nameInput" placeholder="Enter user name" formControlName="name">
             </div>
-            <div class="form-group">
-                <label for="nameInput">Email</label>
-                <input type="email" class="form-control" id="nameInput" placeholder="Enter user email" formControlName="email">
-              </div>
             <button [disabled]="userForm.invalid" type="submit" class="btn custom_background_two btn-md text-light" style="float: right;">{{buttonName}}</button>
           </form>
         </div>

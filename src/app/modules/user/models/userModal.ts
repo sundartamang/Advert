@@ -1,7 +1,6 @@
 export interface User {
-    id : string;
+    customerId : string;
     name : string;
-    email : string;
 }
 
 export interface UserRootModel {

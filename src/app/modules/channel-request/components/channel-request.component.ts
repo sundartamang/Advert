@@ -112,8 +112,10 @@ export class ChannelRequestComponent implements OnInit {
 
   // create advert
   createChannel() {
-    console.log("create submit function called")
-    this._channelService.addChannel(this.channelForm.value).subscribe((res) => {
+    let channel = {
+      channel : this.channelForm.value
+    }
+    this._channelService.addChannel(channel).subscribe((res) => {
       console.log("RES = > ", res)
       if (res) {
         this.getData();
