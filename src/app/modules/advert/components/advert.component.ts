@@ -74,10 +74,18 @@ export class AdvertComponent implements OnInit {
         advert ? advert.name : "",
         [Validators.required]
       ],
-      parent_chhanel_id: [
-        advert ? advert.parent_chhanel_id : "",
+      maxPrice: [
+        advert ? advert.maxPrice : "",
         [Validators.required]
-      ]
+      ],
+      customerId: [
+        advert ? advert.customerId : "",
+        [Validators.required]
+      ],
+      channelId: [
+        advert ? advert.channelId : "",
+        [Validators.required]
+      ],
     });
 
   }
