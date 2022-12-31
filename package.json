@@ -43,7 +43,6 @@
     "zone.js": "~0.9.1",
     "ngx-toastr": "^10.1.0",
     "crypto-js": "^4.1.1"
-
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.29",

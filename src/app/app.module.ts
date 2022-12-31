@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
+import { HttpInterceptorProvider } from './shared/interceptor';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     CoreModule
   ],
-  providers: [],
+  providers: [HttpInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
