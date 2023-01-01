@@ -20,7 +20,7 @@ export class EncryptDecryptService {
       const eText = JSON.parse(localStorage.getItem('currentUser'))
       const decryptedWord = CryptoJS.AES.decrypt(eText, 'my_token')
       const decryptedData = JSON.parse(decryptedWord.toString(CryptoJS.enc.Utf8));
-      return decryptedData['data']
+      return decryptedData['jsonWebToken']
     } else {
       return null
     }

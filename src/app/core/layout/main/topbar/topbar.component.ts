@@ -10,7 +10,7 @@ export class TopbarComponent implements OnInit {
 
   title = 'advert';
 
-  btnActiveName: string = 'home';
+  btnActiveName: string = 'channel';
   constructor(
     private _router : Router
   ){}
@@ -22,9 +22,9 @@ export class TopbarComponent implements OnInit {
     this.btnActiveName = btnName;
 
     if(btnName == 'user'){
-      this._router.navigate(['/user'])
+      this._router.navigate(['dashboard/user'])
     }else{
-      this._router.navigate(['/'])
+      this._router.navigate(['dashboard/channel'])
     }
   }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './core/layout/main/main.component';
+import { AuthGuardGuard } from './shared/guards/auth/auth-guard.guard';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: MainComponent,
+    canActivate: [AuthGuardGuard],
     children: [
       {
         path: 'channel',
@@ -26,7 +28,12 @@ const routes: Routes = [
         loadChildren: () => import("./modules/user/user.module").then(m => m.UserModule)
       }
     ]
-  }
+  },
+
+  {
+    path: 'not-authorized',
+    loadChildren: () => import("./modules/error/not-authorized/not-authorized.module").then(m => m.NotAuthorizedModule)
+  },
 
 
 ];

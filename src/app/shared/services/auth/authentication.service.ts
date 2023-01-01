@@ -6,14 +6,15 @@ import { EncryptDecryptService } from '../encrypptDecrypt/encrypt-decrypt.servic
 import { ShowMessageService } from '../showMessage/show-message.service';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators'
+import { User } from 'src/app/modules/user/models/userModal';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  public currentUser: Observable<any>
-  public currentUserSubject: BehaviorSubject<any>
+  public currentUser: Observable<User>
+  public currentUserSubject: BehaviorSubject<User>
   tokenSubscription = new Subscription()
   baseAPI = environment.baseAPI
   login_api_url = `${this.baseAPI}login`
@@ -22,10 +23,9 @@ export class AuthenticationService {
   constructor(
     private _http: HttpClient,
     private _encryptDecrypt: EncryptDecryptService,
-    private _router: Router,
-    private _showMessage: ShowMessageService,
+    private _router: Router
   ) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')))
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')))
     this.currentUser = this.currentUserSubject.asObservable()
 
   }
@@ -57,15 +57,20 @@ export class AuthenticationService {
 
 
 
-  login(username: string, password: string) {
+  login(data){
+    let username = data.username;
+    let password = data.password;
+    let app = data.app
     return this._http
-      .post<any>(this.login_api_url, { username, password }).pipe(
+      .post<any>(this.login_api_url, { username, password, app }).pipe(
         map(user => {
           // when user credential is not match
+
+          console.log("USER => ", user['jsonWebToken'])
           if (user['statusCode'] == "403") {
-            this._showMessage.toastWarning(user['message'])
+            // this._showMessage.toastWarning(user['message'])
           } else {
-            if (user && user.data.accesstoken) {
+            if (user && user['jsonWebToken']) {
               console.warn("This is response after login.........................", user)
 
               this._encryptDecrypt.encryptToken(user)
@@ -78,6 +83,14 @@ export class AuthenticationService {
         })
       )
   }
+
+  // login(data){
+  //   let username = data.username;
+  //   let password = data.password;
+  //   let app = data.app
+
+  //   return this._http.post<any>(this.login_api_url, {username, password, app})
+  // }
 
 
   // logout

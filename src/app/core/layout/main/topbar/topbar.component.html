@@ -8,12 +8,10 @@
         <ul class="navbar-nav mx-auto">
             <!-- {{btnActiveName}} -->
             <li class="nav-item">
-                <a class="nav-link text-light" (click)="activeBtn('home')"
-                    [ngClass]="btnActive==='home' ? 'active' : '' ">Home</a>
+                <a class="nav-link text-light" (click)="activeBtn('home')" [ngClass]="btnActive==='channel' ? 'active' : '' ">Channel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" (click)="activeBtn('user')"
-                    [ngClass]="btnActive==='user' ? 'active' : '' ">User</a>
+                <a class="nav-link text-light" (click)="activeBtn('user')" [ngClass]="btnActive==='user' ? 'active' : '' ">User</a>
             </li>
         </ul>
     </div>
