@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren: () => import("./modules/advert/advert.module").then(m => m.AdvertModule)
       },
       {
-        path: 'user',
+        path: 'customer',
         loadChildren: () => import("./modules/user/user.module").then(m => m.UserModule)
       }
     ]

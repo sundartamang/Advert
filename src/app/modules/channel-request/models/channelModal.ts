@@ -1,5 +1,4 @@
 export interface Channel {
-    channelId : string;
     name : string;
     parent : string;
 }

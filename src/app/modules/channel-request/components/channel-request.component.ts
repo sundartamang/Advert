@@ -71,16 +71,12 @@ export class ChannelRequestComponent implements OnInit {
   buildAdvertorm() {
     const channel = this.channelDetail;
     this.channelForm = this._fb.group({
-      channelId: [
-        channel ? channel.channelId : "",
-      ],
       name: [
         channel ? channel.name : "",
         [Validators.required]
       ],
       parent: [
         channel ? channel.parent : "",
-        [Validators.required]
       ]
     });
 

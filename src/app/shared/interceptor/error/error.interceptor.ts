@@ -28,25 +28,21 @@ export class ErrorInterceptor implements HttpInterceptor {
                 switch (error.status) {
                     case 0:
                         // server error
-                        $('.modal-backdrop').remove();
-                        this._router.navigate(['network-error'])
+                        console.log("NEtwork error")
                         break;
 
                     case 400:
                         //not found
-                        $('.modal-backdrop').remove();
-                        this._router.navigate(['error'])
+                        this._router.navigate(['not-authorized'])
                         break;
 
                     case 401:
                         //use refresh token
-                        this._authenticationService.logout()
-                        this._router.navigate(['admin-login'])
+                        this._router.navigate(['not-authorized'])
                         break;
 
                     case 403:
                         //not authorized
-                        $('.modal-backdrop').remove();
                         this._router.navigate(['not-authorized'])
                         break;
 

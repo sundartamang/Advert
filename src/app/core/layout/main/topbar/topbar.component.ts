@@ -21,8 +21,8 @@ export class TopbarComponent implements OnInit {
   activeBtn(btnName: string) {
     this.btnActiveName = btnName;
 
-    if(btnName == 'user'){
-      this._router.navigate(['dashboard/user'])
+    if(btnName == 'customer'){
+      this._router.navigate(['dashboard/customer'])
     }else{
       this._router.navigate(['dashboard/channel'])
     }
