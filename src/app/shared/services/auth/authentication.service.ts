@@ -40,22 +40,18 @@ export class AuthenticationService {
   // getter aaccesstoken
   public get getAccessToken() {
     const accessToken = this._encryptDecrypt.decryptToken();
-
-    if (accessToken != null) {
-      return accessToken['accesstoken']
-    }
+    return accessToken
   }
-
-
-
 
 
   // is loggged in
   get isLoggedIn() {
-    return localStorage.getItem('currentUser')
+    if(localStorage.getItem('currentUser')){
+      return true
+    }else{
+      return false
+    }
   }
-
-
 
   login(data){
     let username = data.username;

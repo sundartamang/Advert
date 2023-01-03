@@ -30,38 +30,29 @@ export class AuthInterceptor implements HttpInterceptor {
         const isLoggedIn = this.authenticationService.isLoggedIn
         var token = this.authenticationService.getAccessToken
 
-        // console.warn("ACCESS TOKEN TAKEN FROM Local storage ", token)
+        console.warn("ACCESS TOKEN TAKEN FROM Local storage ", token)
+        console.warn("isLoggedIn ", isLoggedIn)
 
         if (isLoggedIn) {
             request = request.clone({
                 setHeaders: {
-                    accesstoken: `${token}`
+                    'Authorization': `Bearer ${token}`
                 },
             });
         }
-        return next.handle(request).pipe(
-            catchError((err) => {
+        return next.handle(request);
 
-                console.warn("************************...................................................", err)
-                // Unauthorized
-                // if (err && err.status === 401) {
-                //   this.authenticationService.logout()
-                //   // Redirect
-                //   this._router.navigate(['admin-login'])
-                //   // etc.
-                // }
-
-                if ([401, 403].indexOf(err.status) !== -1) {
-                    // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-                    this.authenticationService.logout()
-                    // Redirect
-                    this._router.navigate(['admin-login'])
-                }
-
-                else {
-                    return next.handle(request);
-                }
-            }),
-        );
+        // return next.handle(request).pipe(
+        //     catchError((err) => {
+        //         console.warn("************************...................................................", err)
+        //         if ([401, 403].indexOf(err.status) !== -1) {
+        //             this.authenticationService.logout()
+        //             this._router.navigate(['admin-login'])
+        //         }
+        //         else {
+        //             return next.handle(request);
+        //         }
+        //     }),
+        // );
     }
 }
