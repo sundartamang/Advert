@@ -14,5 +14,10 @@
                 <a class="nav-link text-light" (click)="activeBtn('customer')" [ngClass]="btnActiveName==='customer' ? 'active' : '' ">Customer</a>
             </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link text-light" (click)="logout()">Logout</a>
+            </li>
+        </ul>
     </div>
 </nav>

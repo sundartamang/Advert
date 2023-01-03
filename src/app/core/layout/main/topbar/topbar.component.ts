@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 
 @Component({
   selector: 'app-topbar',
@@ -12,7 +13,8 @@ export class TopbarComponent implements OnInit {
 
   btnActiveName: string = 'channel';
   constructor(
-    private _router : Router
+    private _router : Router,
+    private _authService : AuthenticationService
   ){}
 
   ngOnInit() {
@@ -26,6 +28,11 @@ export class TopbarComponent implements OnInit {
     }else{
       this._router.navigate(['dashboard/channel'])
     }
+  }
+
+  logout(){
+    this._authService.logout();
+    this._router.navigate(['/'])
   }
 
 }

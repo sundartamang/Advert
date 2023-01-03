@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   serviceCategoryDetail: any = [];
   isLoading: boolean;
   public skip = 0;
-  public pageSize = 15;
+  public pageSize = 10;
   orderByKey = "";
   dirKey = "asc";
   public currentPage = 1;
