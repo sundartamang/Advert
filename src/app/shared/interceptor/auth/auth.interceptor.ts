@@ -30,9 +30,6 @@ export class AuthInterceptor implements HttpInterceptor {
         const isLoggedIn = this.authenticationService.isLoggedIn
         var token = this.authenticationService.getAccessToken
 
-        console.warn("ACCESS TOKEN TAKEN FROM Local storage ", token)
-        console.warn("isLoggedIn ", isLoggedIn)
-
         if (isLoggedIn) {
             request = request.clone({
                 setHeaders: {

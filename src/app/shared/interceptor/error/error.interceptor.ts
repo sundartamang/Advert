@@ -33,6 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                     case 400:
                         //not found
+                        $('.modal-backdrop').remove();
                         this._router.navigate(['not-authorized'])
                         break;
 
@@ -43,6 +44,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                     case 403:
                         //not authorized
+                        $('.modal-backdrop').remove();
                         this._router.navigate(['not-authorized'])
                         break;
 
@@ -64,7 +66,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                     case 409:
                         //request conflict
-                        this._router.navigate(['ok-there'])
                         break;
 
                     case 410:
@@ -73,7 +74,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                     case 500:
                         $('.modal-backdrop').remove();
-                        this._router.navigate(['server-error'])
 
                         // setTimeout(()=>{
                         //   window.location.reload();
@@ -83,6 +83,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                     case 502:
                         //bad request
+                        $('.modal-backdrop').remove();
                         break;
 
                     case 503:

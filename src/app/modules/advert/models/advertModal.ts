@@ -1,9 +1,12 @@
 export interface Advert {
     id: string;
     name: string;
-    channelId : string;
-    maxPrice: number;
-    customerId: string;
+    // channelId : string;
+    channel_id : string;
+    // maxPrice: number;
+    max_price : number
+    // customerId: string;
+    customer_id : string;
 }
 
 export interface AdvertRootModel {

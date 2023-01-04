@@ -8,10 +8,11 @@ import {
 } from "@progress/kendo-angular-grid";
 import { AdvertService } from '../service/advert.service';
 import $ from 'jquery';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   SortDescriptor,
 } from "@progress/kendo-data-query";
+import { ShowMessageService } from 'src/app/shared/services/showMessage/show-message.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ import {
 export class AdvertComponent implements OnInit {
 
   // variable declaration
-  editMode: boolean=false;
+  editMode: boolean = false;
   title: string;
   buttonName: string;
   advertForm: FormGroup;
@@ -38,6 +39,8 @@ export class AdvertComponent implements OnInit {
   public currentPage = 1;
   public pagelimtit = 10;
   gridData: any = [];
+  channelName: any;
+  customerList : any = []
 
   //sorting kendo data
   public allowUnsort = true;
@@ -48,19 +51,19 @@ export class AdvertComponent implements OnInit {
     },
   ];
 
-
-
-
-
   constructor(
     private _fb: FormBuilder,
-    private _adverService : AdvertService,
-    private _router: Router
+    private _adverService: AdvertService,
+    private _router: Router,
+    private _activateRoute: ActivatedRoute,
+    private _showMessage: ShowMessageService
   ) { }
 
   ngOnInit(): void {
+    this.channelName = this._activateRoute.snapshot.params['id']
+
     this.buildAdvertorm();
-    this.getData();
+    this.getAdvertList();
   }
 
   // form builder
@@ -74,16 +77,13 @@ export class AdvertComponent implements OnInit {
         advert ? advert.name : "",
         [Validators.required]
       ],
-      maxPrice: [
-        advert ? advert.maxPrice : "",
+      max_price: [
+        advert ? advert.max_price : "",
         [Validators.required]
       ],
-      customerId: [
-        advert ? advert.customerId : "",
-        [Validators.required]
-      ],
-      channelId: [
-        advert ? advert.channelId : "",
+      customer_id: [advert ? advert.customer_id : "", [Validators.required]],
+      channel_id: [
+        advert ? advert.channel_id : this.channelName,
         [Validators.required]
       ],
     });
@@ -95,6 +95,7 @@ export class AdvertComponent implements OnInit {
     this.title = "Add";
     this.buttonName = "Save";
 
+    this.getUsers();
   }
 
   openEditModal() {
@@ -106,9 +107,9 @@ export class AdvertComponent implements OnInit {
 
   // on submit book
   onSubmit(): void {
-    if(this.editMode){
+    if (this.editMode) {
       this.updateAdvert();
-    }else{
+    } else {
       this.createAdvert();
 
     }
@@ -117,13 +118,18 @@ export class AdvertComponent implements OnInit {
   // create advert
   createAdvert() {
     console.log("create submit function called")
-    // console.log(this.advertForm.value)
-    this._adverService.addAdvert(this.advertForm.value).subscribe((res)=>{
-      console.log("RES = > ",res)
-      if(res){
-        this.getData();
+    let advert = {
+      advert: this.advertForm.value
+    }
+    console.log("adverts => ", advert)
+
+    this._adverService.addAdvert(advert).subscribe((res) => {
+      console.log("RES = > ", res)
+      if (res) {
+        this.getAdvertList();
         this.closeModal();
         this.advertForm.reset();
+        this._showMessage.toastSuccess("Advert create successfully")
       }
     })
   }
@@ -139,11 +145,39 @@ export class AdvertComponent implements OnInit {
   }
 
 
-  getData() {
-    this._adverService.getAdvert().subscribe((res)=>{
+  getAdvertList() {
+    let adverts = {
+      adverts: {
+        channelId: this.channelName,
+      }
+    }
+
+    this._adverService.getAdvert(adverts).subscribe((res)=>{
       console.log("RESPONSE ADVERT IS => ", res)
-      this.gridData = res
+      if(res){
+        this.gridData = res
+      }else{
+        this.gridData = []
+      }
     })
+  }
+
+
+  // get customer list
+  getUsers() {
+    this._adverService.getUsersList().subscribe((res) => {
+      if(res){
+        console.log("Get customers list => ",res['customers'] )
+        this.customerList = res['customers']
+      }
+      else{
+        this.customerList = []
+      }
+    })
+  }
+
+  selectCustomer(event){
+    console.log("Selected customer => ", event)
   }
 
 
@@ -153,7 +187,7 @@ export class AdvertComponent implements OnInit {
     document.getElementById("modal").click();
   }
 
-  redirect(id:any){
+  redirect(id: any) {
     this._router.navigate([`/request-channerl/${id}`])
   }
 

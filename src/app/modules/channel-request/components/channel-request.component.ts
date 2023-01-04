@@ -10,6 +10,7 @@ import {
   GridDataResult,
   PageChangeEvent
 } from "@progress/kendo-angular-grid";
+import { ShowMessageService } from 'src/app/shared/services/showMessage/show-message.service';
 
 @Component({
   selector: 'app-channel-request',
@@ -50,7 +51,8 @@ export class ChannelRequestComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _channelService: ChannelService,
-    private _router: Router
+    private _router: Router,
+    private _showMessage: ShowMessageService
   ) { }
 
   ngOnInit(): void {
@@ -117,6 +119,7 @@ export class ChannelRequestComponent implements OnInit {
         this.getData();
         this.closeModal();
         this.channelForm.reset();
+        this._showMessage.toastSuccess("Channel create successfully")
       }
     })
   }
@@ -140,7 +143,7 @@ export class ChannelRequestComponent implements OnInit {
 
   redirect(id: any) {
     console.log("Channel id is => ", id)
-    this._router.navigate([`/request-channerl/${id}`])
+    this._router.navigate([`/dashboard/advert/${id}`])
   }
 
 

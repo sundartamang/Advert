@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment';
@@ -14,10 +14,15 @@ export class AdvertService {
     private _http: HttpClient
   ) { }
 
-  //add advert
-  get_advert = `${this.baseAPI}adverts`
-  getAdvert(): Observable<any> {
-    return this._http.get(this.get_advert);
+  //get advert list
+  get_advert = `${this.baseAPI}adverts/`
+  getAdvert(adverts): Observable<any> {
+    let channel_id = adverts.adverts.channelId
+    // const params = new HttpParams().set('channelId', channel_id);
+    // const headers = new HttpHeaders().set("X-CustomHeader", channel_id);
+
+
+    return this._http.get(`${this.get_advert}channelId=${channel_id}`);
   }
 
   //add advert
@@ -26,11 +31,17 @@ export class AdvertService {
     return this._http.post(this.create_advert, body);
   }
 
-  //update adver
-  update_advert = 'url'
-  updateAdvert(body): Observable<any> {
-    return this._http.put(this.update_advert, body);
+  // get customer list
+  get_user_list = `${this.baseAPI}customers`
+  getUsersList(): Observable<any> {
+    return this._http.get(this.get_user_list);
   }
+
+  //update adver
+  // get_advet_data = 'url'
+  // updateAdvert(body): Observable<any> {
+  //   return this._http.put(this.update_advert, body);
+  // }
 
 
 

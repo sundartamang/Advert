@@ -8,6 +8,7 @@ import {
   GridDataResult,
   PageChangeEvent
 } from "@progress/kendo-angular-grid";
+import { ShowMessageService } from 'src/app/shared/services/showMessage/show-message.service';
 
 @Component({
   selector: 'app-user',
@@ -42,6 +43,7 @@ export class UserComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _fb: FormBuilder,
+    private _showMessage: ShowMessageService
   ) { }
 
   ngOnInit() {
@@ -90,6 +92,7 @@ export class UserComponent implements OnInit {
       if (res) {
         this.getUsers();
         this.closeModal();
+        this._showMessage.toastSuccess("Customer create successfully")
       }
     })
   }
