@@ -40,19 +40,18 @@ export class AuthInterceptor implements HttpInterceptor {
                 },
             });
         }
-        return next.handle(request);
 
-        // return next.handle(request).pipe(
-        //     catchError((err) => {
-        //         console.warn("************************...................................................", err)
-        //         if ([401, 403].indexOf(err.status) !== -1) {
-        //             this.authenticationService.logout()
-        //             this._router.navigate(['admin-login'])
-        //         }
-        //         else {
-        //             return next.handle(request);
-        //         }
-        //     }),
-        // );
+        return next.handle(request).pipe(
+            catchError((err) => {
+                console.warn("************************...................................................", err)
+                if ([401, 403].indexOf(err.status) !== -1) {
+                    this.authenticationService.logout()
+                    this._router.navigate(['/'])
+                }
+                else {
+                    return next.handle(request);
+                }
+            }),
+        );
     }
 }

@@ -139,6 +139,7 @@ export class ChannelRequestComponent implements OnInit {
   }
 
   redirect(id: any) {
+    console.log("Channel id is => ", id)
     this._router.navigate([`/request-channerl/${id}`])
   }
 
