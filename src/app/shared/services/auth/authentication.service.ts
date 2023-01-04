@@ -61,13 +61,10 @@ export class AuthenticationService {
       .post<any>(this.login_api_url, { username, password, app }).pipe(
         map(user => {
           // when user credential is not match
-
-          console.log("USER => ", user['jsonWebToken'])
           if (user['statusCode'] == "403") {
             // this._showMessage.toastWarning(user['message'])
           } else {
             if (user && user['jsonWebToken']) {
-              console.warn("This is response after login.........................", user)
 
               this._encryptDecrypt.encryptToken(user)
               // notify

@@ -64,7 +64,6 @@ export class ChannelRequestComponent implements OnInit {
   // get channel list
   getData() {
     this._channelService.getChannelList().subscribe((res) => {
-      console.warn("RESPONSE channel IS => ", res['channels'])
       this.gridData = res['channels']
     })
   }
@@ -114,7 +113,6 @@ export class ChannelRequestComponent implements OnInit {
       channel : this.channelForm.value
     }
     this._channelService.addChannel(channel).subscribe((res) => {
-      console.log("RES = > ", res)
       if (res) {
         this.getData();
         this.closeModal();
@@ -142,7 +140,6 @@ export class ChannelRequestComponent implements OnInit {
   }
 
   redirect(id: any) {
-    console.log("Channel id is => ", id)
     this._router.navigate([`/dashboard/advert/${id}`])
   }
 

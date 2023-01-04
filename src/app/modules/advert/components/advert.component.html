@@ -1,24 +1,14 @@
 <div class="card-header">
-    <div class="row">
-      <!-- <div class="col-6">
-        <span class="back_location" (click)="back()">
-          <b><<</b>
-          Back
-        </span>      
-      </div> -->
-      <div class="col-6">
-        <button class="btn custom_background_two btn-oval btn-sm float-right text-light"
-          data-toggle="modal" data-target="#exampleModal"
-          (click)="openCreateModal()">
-          <b>Add advert</b> &nbsp;<i class="fa fa-plus-circle mr-2"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="card-body">
-      <!-- kendo grid start -->
-      <p>Advert list under <b>{{channelName}}</b> channel</p>
-      <!-- <kendo-grid
+    <button class="btn custom_background_two br-50 btn-oval btn-sm text-light" data-toggle="modal"
+      data-target="#exampleModal" (click)="openCreateModal()">
+      <!-- <b>Add advert</b> &nbsp; -->
+      <i class="fa fa-plus-circle"></i>
+    </button>
+</div>
+<div class="card-body">
+  <!-- kendo grid start -->
+  <p>Advert list under <b>{{channelName}}</b> channel</p>
+  <kendo-grid
         [kendoGridBinding]="gridData"
         [pageSize]="pageSize"
         [skip]="skip"
@@ -46,7 +36,7 @@
         </kendo-grid-column>
         <kendo-grid-column
             field="name"
-            title="Name"
+            title="Advert list"
             [headerStyle]="{
             'font-weight': 'bold' }">
         </kendo-grid-column>
@@ -56,53 +46,53 @@
           [headerStyle]="{
           'font-weight': 'bold' }">
         </kendo-grid-column>
-      </kendo-grid> -->
-      <!-- kendo grid end ---->
-    <!-- kendo grid end -->
-  </div>
-  
-  
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header custom_background">
-          <h5 class="modal-title text-light" id="exampleModalLabel ">{{title}}</h5>
-          <button type="button" class="close" data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true" id="modal" class="text-light">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="advertForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="nameInput">Name</label>
-                <input type="text" class="form-control" id="nameInput"
-                  placeholder="Enter name" formControlName="name">
-            </div>
-            <div class="form-group">
-                <label for="advertNameInput">Channel name</label>
-                <input type="text" class="form-control" id="advertNameInput"
-                  [value]="channelName"
-                  formControlName="channel_id" readonly>
-            </div>
-            <div class="form-group">
-                <label for="bidPriceInput">Max price</label>
-                <input type="number" class="form-control" id="bidPriceInput"
-                  placeholder="Enter maximum bid price"
-                  min="0" formControlName="max_price">
-            </div>
-            <div class="form-group">
-                <label for="bidPriceInput">Select Customer</label>
-                <select class="custom-select form-control" formControlName="customer_id" (change)="selectCustomer($event)">
-                    <option selected disabled>Select customer</option>
-                    <option [value]="data?.customerId" *ngFor="let data of customerList">{{data.name}}</option>
-                </select>
-            </div>
-            <!-- <div class="row">
+        <kendo-grid-column
+          field="customer_id"
+          title="Customer name"
+          [headerStyle]="{
+          'font-weight': 'bold' }">
+        </kendo-grid-column>
+      </kendo-grid>
+  <!-- kendo grid end -->
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_background">
+        <h5 class="modal-title text-light" id="exampleModalLabel ">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="modal" class="text-light">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="advertForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" class="form-control" id="nameInput" placeholder="Enter name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="advertNameInput">Channel name</label>
+            <input type="text" class="form-control" id="advertNameInput" [value]="channelName"
+              formControlName="channel_id" readonly>
+          </div>
+          <div class="form-group">
+            <label for="bidPriceInput">Max price</label>
+            <input type="number" class="form-control" id="bidPriceInput" placeholder="Enter maximum bid price" min="0"
+              formControlName="max_price">
+          </div>
+          <div class="form-group">
+            <label for="bidPriceInput">Select Customer</label>
+            <select class="custom-select form-control" formControlName="customer_id" (change)="selectCustomer($event)">
+              <option selected disabled>Select customer</option>
+              <option [value]="data?.customerId" *ngFor="let data of customerList">{{data.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <label for="adImageInput">Select Ad image</label>
                 <input type="file" class="form-control" id="adImageInput" formControlName="image" (change)="readImageURL($event);">
@@ -113,11 +103,11 @@
                 <img *ngIf="imageSrc" id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
               </div>
             </div> -->
-            <button type="submit" class="btn custom_background_two btn-md text-light"
-              [disabled]="advertForm.invalid" style="float: right;">{{buttonName}}</button>
-          </form>
-        </div>
+          <button type="submit" class="btn custom_background_two btn-md text-light" [disabled]="advertForm.invalid"
+            style="float: right;">{{buttonName}}</button>
+        </form>
       </div>
     </div>
   </div>
-  <!-- modal section end -->
+</div>
+<!-- modal section end -->
